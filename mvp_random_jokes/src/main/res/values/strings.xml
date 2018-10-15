@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MVP_Random_Jokes</string>
+    <string name="button.text.showjoke">Show me jokes</string>
+    <string name="edittext.hint.enterjoke">Enter random digit</string>
+</resources>
