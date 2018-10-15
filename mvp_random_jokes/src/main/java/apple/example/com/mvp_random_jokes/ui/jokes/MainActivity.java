@@ -17,6 +17,7 @@ import apple.example.com.mvp_random_jokes.data.api.ApiInterface;
 import apple.example.com.mvp_random_jokes.data.model.Joke;
 import apple.example.com.mvp_random_jokes.data.model.JokeResponse;
 import apple.example.com.mvp_random_jokes.ui.jokes.adapter.JokesAdapter;
+import apple.example.com.mvp_random_jokes.utils.TextUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements JokeView{
     @BindView(R.id.btn_show_joke)
     Button btnShow;
     JokePresenter presenter;
+    TextUtils textUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements JokeView{
 
     @OnClick({R.id.btn_show_joke})
     public void showJokes(){
-        presenter.showJoke(etJokeId.getText().toString());
+        presenter.showJoke(textUtils.getRandomDigit());
     }
 
     @Override

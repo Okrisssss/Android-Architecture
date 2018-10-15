@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/mvc" />
             <option value="$PROJECT_DIR$/mvi" />
             <option value="$PROJECT_DIR$/mvp" />
+            <option value="$PROJECT_DIR$/mvp_dagger" />
             <option value="$PROJECT_DIR$/mvp_random_jokes" />
             <option value="$PROJECT_DIR$/mvvm" />
           </set>
