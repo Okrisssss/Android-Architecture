@@ -1,11 +1,8 @@
 package com.example.mvp_dagger.di.modules;
 
-import android.content.Context;
-
-import com.example.mvp_dagger.api.ApiInterface;
 import com.example.mvp_dagger.di.scopes.ScopeMain;
 import com.example.mvp_dagger.presenter.JokesPresenter;
-import com.example.mvp_dagger.view.MainActivity;
+import com.example.mvp_dagger.view.JokeView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,15 +10,15 @@ import dagger.Provides;
 @Module
 public class MainModule {
 
-    private MainActivity mainActivity;
+    private JokeView jokeView;
 
-    public MainModule(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public MainModule(JokeView jokeView) {
+        this.jokeView = jokeView;
     }
 
     @Provides
     @ScopeMain
-    public JokesPresenter providePresenter(Context context, ApiInterface apiInterface) {
-        return new JokesPresenter(context, apiInterface);
+    public JokesPresenter providePresenter() {
+        return new JokesPresenter(jokeView);
     }
 }

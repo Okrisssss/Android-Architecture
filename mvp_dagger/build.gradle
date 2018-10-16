@@ -50,4 +50,16 @@ dependencies {
 
     // Gson
     implementation "com.google.code.gson:gson:2.7"
+
+    // Butterknife
+    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    //recycleview
+    implementation "com.android.support:recyclerview-v7:${recyclerVieweVersion}"
+    implementation "com.android.support:design:${designVersion}"
+    implementation "com.android.support:cardview-v7:${cardVersion}"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxandroid:${RxJava}"
+    implementation "io.reactivex.rxjava2:rxjava:${RxAndroid}"
 }

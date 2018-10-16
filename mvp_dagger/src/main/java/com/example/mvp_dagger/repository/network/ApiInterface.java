@@ -1,4 +1,4 @@
-package com.example.mvp_dagger.api;
+package com.example.mvp_dagger.repository.network;
 
 import com.example.mvp_dagger.model.JokeResponse;
 

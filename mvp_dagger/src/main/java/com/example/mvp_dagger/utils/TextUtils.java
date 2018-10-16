@@ -1,4 +1,4 @@
-package apple.example.com.mvp_random_jokes.utils;
+package com.example.mvp_dagger.utils;
 
 import java.util.Random;
 
@@ -8,3 +8,4 @@ public class TextUtils {
         return randomNumber;
     }
 }
+

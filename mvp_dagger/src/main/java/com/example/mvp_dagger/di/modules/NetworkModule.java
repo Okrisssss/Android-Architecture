@@ -1,7 +1,7 @@
 package com.example.mvp_dagger.di.modules;
 
 import com.example.mvp_dagger.BuildConfig;
-import com.example.mvp_dagger.api.ApiInterface;
+import com.example.mvp_dagger.repository.network.ApiInterface;
 import com.example.mvp_dagger.utils.DateDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +24,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
+    @Named("retrofit_joke")
     Retrofit provideRetrofitWithGson(Gson gson, OkHttpClient okHttpClient) {
         return getRetrofitBuilder(okHttpClient, gson)
                 .baseUrl(BuildConfig.BASE_URL)
@@ -55,7 +56,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    ApiInterface provideJokeRestApi(Retrofit retrofit) {
+    ApiInterface provideJokeRestApi(@Named("retrofit_joke") Retrofit retrofit) {
         return retrofit.create(ApiInterface.class);
     }
 

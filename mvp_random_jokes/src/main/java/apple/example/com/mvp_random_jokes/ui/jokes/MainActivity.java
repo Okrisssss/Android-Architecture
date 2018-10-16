@@ -26,8 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements JokeView{
-    @BindView(R.id.et_joke_id)
-    EditText etJokeId;
     @BindView(R.id.btn_show_joke)
     Button btnShow;
     JokePresenter presenter;

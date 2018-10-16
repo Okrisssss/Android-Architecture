@@ -10,4 +10,10 @@ public class MyApplication extends Application {
         super.onCreate();
         Injector.INSTANCE.initApplicationComponent(this);
     }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        Injector.INSTANCE.releaseApplicationComponent();
+    }
 }

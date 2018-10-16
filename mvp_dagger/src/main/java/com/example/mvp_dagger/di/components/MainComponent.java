@@ -10,6 +10,5 @@ import dagger.Component;
 @ScopeMain
 @Component(dependencies = {ApplicationComponent.class}, modules = {MainModule.class})
 public interface MainComponent {
-
     void inject(MainActivity mainActivity);
 }
