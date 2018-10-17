@@ -8,6 +8,7 @@ import com.example.mvp_dagger.di.components.MainComponent;
 import com.example.mvp_dagger.di.modules.ApplicationModule;
 import com.example.mvp_dagger.di.modules.MainModule;
 import com.example.mvp_dagger.di.modules.NetworkModule;
+import com.example.mvp_dagger.presenter.JokesPresenter;
 import com.example.mvp_dagger.view.MainActivity;
 
 public enum Injector {

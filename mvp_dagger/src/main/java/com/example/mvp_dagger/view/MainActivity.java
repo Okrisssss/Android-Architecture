@@ -10,9 +10,7 @@ import android.widget.Toast;
 import com.example.mvp_dagger.R;
 import com.example.mvp_dagger.di.Injector;
 import com.example.mvp_dagger.model.Joke;
-import com.example.mvp_dagger.model.JokeResponse;
 import com.example.mvp_dagger.presenter.JokesPresenter;
-import com.example.mvp_dagger.repository.network.ApiInterface;
 import com.example.mvp_dagger.utils.TextUtils;
 import com.example.mvp_dagger.view.adapter.JokesAdapter;
 
@@ -23,17 +21,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
+
 
 public class MainActivity extends AppCompatActivity implements JokeView {
     @BindView(R.id.btn_show_joke)
     Button btnShow;
+
     @Inject
     JokesPresenter presenter;
-
-    @Inject
-    ApiInterface apiInterface;
-
     TextUtils textUtils;
 
     @Override
@@ -59,11 +54,6 @@ public class MainActivity extends AppCompatActivity implements JokeView {
     @Override
     public void onError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public Call<JokeResponse> getJokes(String jokeNumber) {
-        return apiInterface.getRandomJokes(jokeNumber);
     }
 
     @Override

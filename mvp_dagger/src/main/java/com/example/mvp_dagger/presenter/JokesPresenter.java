@@ -1,48 +1,43 @@
 package com.example.mvp_dagger.presenter;
 
-import android.support.annotation.NonNull;
+import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.example.mvp_dagger.di.Injector;
 import com.example.mvp_dagger.model.Joke;
-import com.example.mvp_dagger.model.JokeResponse;
+import com.example.mvp_dagger.repository.network.ApiInterface;
 import com.example.mvp_dagger.view.JokeView;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class JokesPresenter {
-
+    ApiInterface apiInterface;
     private JokeView jokeView;
 
-    public JokesPresenter(JokeView jokeView) {
+    public JokesPresenter(JokeView jokeView, ApiInterface apiInterface) {
         this.jokeView = jokeView;
+        this.apiInterface = apiInterface;
     }
 
+    @SuppressLint("CheckResult")
     public void showJoke(String jokeId) {
-        jokeView.getJokes(jokeId)
-                .enqueue(new Callback<JokeResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<JokeResponse> call, @NonNull Response<JokeResponse> response) {
-                        JokeResponse data = response.body();
-
-                        if (data != null && data.getJoke() != null) {
-                            List<Joke> joke = data.getJoke();
-                            jokeView.onJokeReceived(joke);
-                            Log.d("SimpleLog", joke.get(0).getJoke());
-                        } else {
-                            jokeView.onError("Something went wrong!");
-                        }
+        //subscribeOn - working thread for long time operation
+        //observeOn - thread to display result
+        apiInterface.getRandomJokes(jokeId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(jokeResponse -> {
+                    if (jokeResponse != null && jokeResponse.getJoke() != null) {
+                        List<Joke> joke = jokeResponse.getJoke();
+                        jokeView.onJokeReceived(joke);
                     }
-
-                    @Override
-                    public void onFailure(@NonNull Call<JokeResponse> call, @NonNull Throwable t) {
-                        call.cancel();
-                        jokeView.onError(t.getMessage());
-                        Log.d("SimpleLog", t.getMessage());
-                    }
+                }, throwable -> {
+                    jokeView.onError("Something went wrong! throwable is " + throwable.getMessage());
                 });
     }
 

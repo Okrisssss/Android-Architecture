@@ -5,6 +5,7 @@ import com.example.mvp_dagger.repository.network.ApiInterface;
 import com.example.mvp_dagger.utils.DateDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +29,7 @@ public class NetworkModule {
     Retrofit provideRetrofitWithGson(Gson gson, OkHttpClient okHttpClient) {
         return getRetrofitBuilder(okHttpClient, gson)
                 .baseUrl(BuildConfig.BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 

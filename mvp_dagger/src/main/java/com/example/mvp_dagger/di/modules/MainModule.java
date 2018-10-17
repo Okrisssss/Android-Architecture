@@ -2,6 +2,7 @@ package com.example.mvp_dagger.di.modules;
 
 import com.example.mvp_dagger.di.scopes.ScopeMain;
 import com.example.mvp_dagger.presenter.JokesPresenter;
+import com.example.mvp_dagger.repository.network.ApiInterface;
 import com.example.mvp_dagger.view.JokeView;
 
 import dagger.Module;
@@ -18,7 +19,7 @@ public class MainModule {
 
     @Provides
     @ScopeMain
-    public JokesPresenter providePresenter() {
-        return new JokesPresenter(jokeView);
+    public JokesPresenter providePresenter(ApiInterface apiInterface) {
+        return new JokesPresenter(jokeView, apiInterface);
     }
 }
