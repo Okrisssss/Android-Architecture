@@ -1,5 +1,7 @@
 package com.example.mvvm_random_joke.data.api;
 
+import com.example.mvvm_random_joke.BuildConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

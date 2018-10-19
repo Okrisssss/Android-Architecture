@@ -3,8 +3,6 @@ package com.example.mvvm_random_joke.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mvvm_random_joke.R;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

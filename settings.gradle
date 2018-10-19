@@ -1,1 +1,1 @@
-include ':mvp', ':mvc', ':mvc', ':mvvm', ':mvp_random_jokes', ':mvp_dagger', ':mvvm_random_joke'
+include ':mvp', ':mvc', ':mvc', ':mvvm', ':mvp_random_jokes', ':mvp_dagger', ':just_simple_mvvm'

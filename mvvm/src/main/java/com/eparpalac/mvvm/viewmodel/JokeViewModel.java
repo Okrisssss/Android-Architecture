@@ -20,6 +20,8 @@ public class JokeViewModel {
 
     public ObservableField<String> jokeId = new ObservableField<>();
     public ObservableField<String> jokeText = new ObservableField<>();
+
+
     public TextWatcher jokeIdWatcher = new TextWatcherAdapter() {
         @Override
         public void afterTextChanged(Editable s) {
