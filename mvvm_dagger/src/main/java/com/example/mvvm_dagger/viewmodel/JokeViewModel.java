@@ -1,4 +1,5 @@
-package com.example.just_simple_mvvm.viewmodel;
+package com.example.mvvm_dagger.viewmodel;
+
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -7,12 +8,11 @@ import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.example.just_simple_mvvm.BR;
-import com.example.just_simple_mvvm.data.api.ApiClient;
-import com.example.just_simple_mvvm.data.model.Joke;
-import com.example.just_simple_mvvm.data.model.JokeResponse;
-import com.example.just_simple_mvvm.utils.TextUtils;
-import com.example.just_simple_mvvm.utils.TextWatcherAdapter;
+import com.example.mvvm_dagger.model.Joke;
+import com.example.mvvm_dagger.model.JokeResponse;
+import com.example.mvvm_dagger.repository.network.ApiInterface;
+import com.example.mvvm_dagger.utils.TextUtils;
+import com.example.mvvm_dagger.utils.TextWatcherAdapter;
 
 import java.util.Objects;
 
@@ -25,19 +25,22 @@ public class JokeViewModel extends BaseObservable {
     public ObservableField<String> jokeText = new ObservableField<>();
     public ObservableField<String> txtRandomDigit = new ObservableField<>();
 
-    private ApiClient apiClient = new ApiClient();
-    private int busy = 8;
+    ApiInterface apiInterface;
+    private int progressBar = 8;
 
     @Bindable
-    public int getBusy() {
-        return this.busy;
+    public int getProgressBar() {
+        return this.progressBar;
+    }
+    public void setProgressBar(int progressBar) {
+        this.progressBar = progressBar;
+       notifyPropertyChanged(com.example.mvvm_dagger.viewmodel.);
     }
 
-    public void setBusy(int busy) {
-        this.busy = busy;
-        notifyPropertyChanged(BR.busy);
-    }
 
+    public JokeViewModel(ApiInterface apiInterface) {
+        this.apiInterface = apiInterface;
+    }
 
     public TextWatcher randomDigitTextWatcher = new TextWatcherAdapter() {
         @Override
@@ -48,11 +51,22 @@ public class JokeViewModel extends BaseObservable {
         }
     };
 
+    public JokeViewModel() {
+    }
+//    @Bindable
+//    public int getBusy(){
+//        return this.busy;
+//    }
+//
+//    public void setBusy(){
+//        this.busy = busy;
+//        notifyPropertyChanged(busy);
+//    }
+
     public void showJoke() {
         txtRandomDigit.set(TextUtils.getRandomDigit());
-        setBusy(0);
-        apiClient
-                .getClient()
+        //setBusy(0);
+        apiInterface
                 .getJoke(txtRandomDigit.get())
                 .enqueue(new Callback<JokeResponse>() {
                     @Override
@@ -62,7 +76,7 @@ public class JokeViewModel extends BaseObservable {
                         if (data != null && data.getJoke() != null) {
                             Joke joke = data.getJoke();
                             jokeText.set(joke.getJokeText());
-                            setBusy(8);
+//                           setBusy(8);
                         } else {
                             jokeText.set("Something went wrong!");
                         }
