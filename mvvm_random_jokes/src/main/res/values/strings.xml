@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">mvvm_random_jokes</string>
-    <string name="button.text.showjoke">Show me a joke</string>
-    <string name="edittext.hint.enterjoke">Enter joke id…</string>
-</resources>
