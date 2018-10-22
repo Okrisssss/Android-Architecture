@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import com.example.mvvm_dagger.BR;
 import com.example.mvvm_dagger.model.Joke;
 import com.example.mvvm_dagger.model.JokeResponse;
 import com.example.mvvm_dagger.repository.network.ApiInterface;
@@ -32,9 +33,10 @@ public class JokeViewModel extends BaseObservable {
     public int getProgressBar() {
         return this.progressBar;
     }
+
     public void setProgressBar(int progressBar) {
         this.progressBar = progressBar;
-       notifyPropertyChanged(com.example.mvvm_dagger.viewmodel.);
+        notifyPropertyChanged(BR.progressBar);
     }
 
 
@@ -53,19 +55,10 @@ public class JokeViewModel extends BaseObservable {
 
     public JokeViewModel() {
     }
-//    @Bindable
-//    public int getBusy(){
-//        return this.busy;
-//    }
-//
-//    public void setBusy(){
-//        this.busy = busy;
-//        notifyPropertyChanged(busy);
-//    }
 
     public void showJoke() {
         txtRandomDigit.set(TextUtils.getRandomDigit());
-        //setBusy(0);
+        setProgressBar(0);
         apiInterface
                 .getJoke(txtRandomDigit.get())
                 .enqueue(new Callback<JokeResponse>() {
@@ -76,7 +69,7 @@ public class JokeViewModel extends BaseObservable {
                         if (data != null && data.getJoke() != null) {
                             Joke joke = data.getJoke();
                             jokeText.set(joke.getJokeText());
-//                           setBusy(8);
+                            setProgressBar(8);
                         } else {
                             jokeText.set("Something went wrong!");
                         }
